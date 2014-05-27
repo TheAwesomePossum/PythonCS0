@@ -4,7 +4,7 @@ from Globals import *
 
 start()
 
-endTime = startTime + 10
+time.sleep(5)
 
-while(currentTime < endTime):
-    pass
+print "Stopping"
+stop()

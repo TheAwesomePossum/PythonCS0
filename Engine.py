@@ -39,7 +39,7 @@ def start(width, height, caption, color):
     Sets up the window
     Starts graphics thread
     '''
-    pygame.init()
+    g.pygame.init()
     size = (width, height)
     g.window = pygame.display.set_mode(size)
     pygame.display.set_caption(caption)

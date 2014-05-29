@@ -1,10 +1,11 @@
 from cs0 import *
 import time
-from Globals import *
+
+Globals.deltaTime = 1
 
 start()
 
 time.sleep(5)
 
-print "Stopping"
+print("Stopping")
 stop()

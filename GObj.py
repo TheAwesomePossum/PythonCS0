@@ -4,9 +4,13 @@ Western State Colorado University
 
 This file holds the Graphic objects for the library
 '''
+
+# External imports
 import threading
 
+# Internal imports
 from Globals import *
+from Colors import *
 
 class GObj:
 
@@ -32,3 +36,12 @@ class Circle(GObj):
         self.x = x
         self.y = y
         self.radius = radius
+        self.color = RED
+        self.visible
+        
+    def move(self, xv, yv):
+        self.x += xv
+        self.y += yv
+        
+    def draw(self, window):
+        pygame.draw.circle(window, self.color, (self.x, self.y), self.radius, 0)

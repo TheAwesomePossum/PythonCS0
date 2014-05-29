@@ -19,7 +19,16 @@ def flipDisplay():
     while(g.running):
         g.currentTime = time.time()
         if g.currentTime > g.refreshTime:
-            print "Updating window"
+            g.window.fill(g.bgcolor)
+            world = g.world
+            world.acquire()
+            for gobj in world.world:
+                gobj.acquire()
+                gobj.draw(g.window)
+                gobj.release()
+            world.release()
+            pygame.display.flip()
+            print("Updating window")
             g.refreshTime = g.currentTime + g.deltaTime
 
 GraphicThread = threading.Thread(target=flipDisplay, args=())
@@ -35,6 +44,7 @@ def start(width, height, caption, color):
     g.window = pygame.display.set_mode(size)
     pygame.display.set_caption(caption)
     g.window.fill(color)
+    g.bgcolor = color
     pygame.display.flip()
     g.running = True
     g.startTime = time.time()

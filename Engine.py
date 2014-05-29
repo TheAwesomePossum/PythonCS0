@@ -16,7 +16,7 @@ def flipDisplay():
     '''
     this will be the graphics thread
     '''
-    while(g.running):
+    while(g.running and g.threadCount is threading.activeCount()):
         g.currentTime = time.time()
         if g.currentTime > g.refreshTime:
             g.window.fill(g.bgcolor)
@@ -47,6 +47,7 @@ def start(width, height, caption, color):
     g.pygame.display.flip()
     g.running = True
     g.startTime = time.time()
+    g.threadCount += 1
     GraphicThread.start()
     
 def stop():

@@ -42,7 +42,7 @@ def start(width, height, caption, color):
     g.pygame.init()
     size = (width, height)
     g.window = g.pygame.display.set_mode(size)
-    pygame.display.set_caption(caption)
+    g.pygame.display.set_caption(caption)
     g.window.fill(color)
     g.bgcolor = color
     g.pygame.display.flip()

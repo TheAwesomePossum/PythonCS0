@@ -11,6 +11,7 @@ import Globals
 import Engine
 
 from Colors import *
+from GObj import *
 
 WindowWidth = 500
 WindowHeight = 500

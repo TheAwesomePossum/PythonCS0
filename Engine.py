@@ -41,11 +41,11 @@ def start(width, height, caption, color):
     '''
     g.pygame.init()
     size = (width, height)
-    g.window = pygame.display.set_mode(size)
+    g.window = g.pygame.display.set_mode(size)
     pygame.display.set_caption(caption)
     g.window.fill(color)
     g.bgcolor = color
-    pygame.display.flip()
+    g.pygame.display.flip()
     g.running = True
     g.startTime = time.time()
     GraphicThread.start()

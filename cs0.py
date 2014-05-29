@@ -5,6 +5,8 @@ Western State Colorado University
 This file is the baisic import file for any cs0 project. It will hold some baisic functions for manipulating the world and starting the engine
 '''
 
+import time
+
 import Globals
 import Engine
 
@@ -23,3 +25,6 @@ def start():
 
 def stop():
     Engine.stop()
+    
+def pause(t):
+    time.sleep(t)

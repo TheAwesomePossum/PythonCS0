@@ -4,9 +4,7 @@ start()
 
 c = Circle(5,5)
 
-for i in range(0,100):
-    c.move(1, 1)
-    pause(.1)
+time.sleep(5)
 
 print("Stopping")
 stop()

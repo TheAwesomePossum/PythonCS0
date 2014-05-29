@@ -7,6 +7,7 @@ This file holds the Graphic objects for the library
 
 # External imports
 import threading
+import math
 
 # Internal imports
 from Globals import *
@@ -14,8 +15,16 @@ from Colors import *
 
 class GObj:
 
-    def __init__(self):
+    def __init__(self, x, y, color, visible):
         self._lock = threading.Lock()
+        self.x = x
+        self.y = y
+        self.color = color
+        self.visible = visible
+        
+    def move(self, xv, yv):
+        self.x += xv
+        self.y += yv
         
     def acquire(self):
         self._lock.acquire()
@@ -31,17 +40,65 @@ class GObj:
 
 class Circle(GObj):
 
-    def __init__(self, x, y, radius):
-        GObj.__init__(self)
-        self.x = x
-        self.y = y
+    def __init__(self, x, y, radius, color = RED, visible = True):
+        GObj.__init__(self, x, y, color, visible)
         self.radius = radius
-        self.color = RED
-        self.visible = True
-        
-    def move(self, xv, yv):
-        self.x += xv
-        self.y += yv
+        self._type = "Circle"
         
     def draw(self, window):
-        pygame.draw.circle(window, self.color, (self.x, self.y), self.radius, 0)
+        if self.visible:
+            pygame.draw.circle(window, self.color, (self.x, self.y), self.radius, 0)
+    
+    def _getBox(self):
+        x = self.x
+        y = self.y
+        r = self.radius
+        return ((x, y),(x+2*r, y+2*r)) 
+    
+    
+class Rectangle(GObj):
+    
+    def __init__(self, x, y, width, height, color = RED, visible = True):
+        GObj.__init__(self, x, y, color, visible)
+        self.width = width
+        self.height = height
+        self._type = "Rectangle"
+        
+    def draw(self, window):
+        if self.visible:
+            pygame.draw.rect(window, self.color, (self.x, self.y, self.width, self.height), 0)
+            
+    def _getBox(self):
+        x = self.x
+        y = self.y
+        w = self.width
+        h = self.height
+        return ((x, y),(x+w, y+h)) 
+ 
+def collides(obj1, obj2):
+    box1 = obj1._getBox()
+    box2 = obj2._getBox()
+    xmin = 0
+    xmax = 0
+    ymin = 0
+    ymax = 0
+    w = 0
+    h = 0
+    if box1[0][0] < box2[0][0]:
+        xmin = box1[0][0]
+        xmax = box2[0][0]
+        w = box1[1][0] - box1[0][0]
+    else:
+        xmin = box2[0][0]
+        xmax = box1[0][0]
+        w = box2[1][0] - box2[0][0]
+    if box1[0][1] < box2[0][1]:
+        ymin = box1[0][1]
+        ymax = box2[0][1]
+        h = box1[1][1] - box1[0][1]
+    else:
+        ymin = box2[0][1]
+        ymax = box1[0][1]
+        h = box2[1][1] - box2[0][1]
+    return xmax - xmin < w and ymax - ymin < h
+ 

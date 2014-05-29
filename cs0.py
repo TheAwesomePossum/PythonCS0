@@ -7,22 +7,25 @@ This file is the baisic import file for any cs0 project. It will hold some baisi
 
 import time
 
-import Globals
+import Globals as g
 import Engine
 
 from Colors import *
 from GObj import *
 
-WindowWidth = 500
-WindowHeight = 500
-WindowCaption = "Game Window"
-WindowColor = WHITE
+g.WindowWidth = 500
+g.WindowHeight = 500
+g.WindowCaption = "Game Window"
+g.WindowColor = WHITE
 
 def add(obj):
-    Globals.world.add(obj)
+    g.world.add(obj)
+
+def remove(obj):
+    g.world.remove(obj)
 
 def start():
-    Engine.start(WindowWidth, WindowHeight, WindowCaption, WindowColor)
+    Engine.start(g.WindowWidth, g.WindowHeight, g.WindowCaption, g.WindowColor)
 
 def stop():
     Engine.stop()

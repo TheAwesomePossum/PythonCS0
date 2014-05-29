@@ -22,12 +22,15 @@ class GObj:
     def release(self):
         self._lock.release()
     def __setattr__(self, item, value):
-        self.acquire()
-        if self.__dict__.hasitem(item):
-            dict.__setattr__(self, item, value)
+        if item is "_lock":
+            self.__setitem__(item, value)
         else:
-            self. __setitem__(item, value)
-        self.release()
+            self.acquire()
+            if self.__dict__.hasitem(item):
+                dict.__setattr__(self, item, value)
+            else:
+                self. __setitem__(item, value)
+            self.release()
 
 class Circle(GObj):
 

@@ -24,11 +24,11 @@ def flipDisplay():
             world.acquire()
             for gobj in world.world:
                 gobj.acquire()
+                print("drawing circle")
                 gobj.draw(g.window)
                 gobj.release()
             world.release()
             g.pygame.display.flip()
-            print("Updating window")
             g.refreshTime = g.currentTime + g.deltaTime
 
 GraphicThread = threading.Thread(target=flipDisplay, args=())

@@ -24,7 +24,6 @@ def flipDisplay():
             world.acquire()
             for gobj in world.world:
                 gobj.acquire()
-                print("drawing circle")
                 gobj.draw(g.window)
                 gobj.release()
             world.release()

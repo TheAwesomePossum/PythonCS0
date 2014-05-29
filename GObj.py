@@ -23,7 +23,7 @@ class GObj:
         self._lock.release()
     def __setattr__(self, item, value):
         if item is "_lock":
-            self.__setitem__(item, value)
+            self.__dict__[item] = value
         else:
             self.acquire()
             self.__dict__[item] = value

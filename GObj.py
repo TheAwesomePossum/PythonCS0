@@ -29,7 +29,7 @@ class GObj:
             if self.__dict__.hasitem(item):
                 dict.__setattr__(self, item, value)
             else:
-                self. __setitem__(item, value)
+                self.__setitem__(item, value)
             self.release()
 
 class Circle(GObj):

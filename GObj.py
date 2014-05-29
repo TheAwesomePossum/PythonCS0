@@ -26,6 +26,10 @@ class GObj:
         self.x += xv
         self.y += yv
         
+    def setLocation(x, y):
+        self.x = x
+        self.y = y
+    
     def acquire(self):
         self._lock.acquire()
     def release(self):

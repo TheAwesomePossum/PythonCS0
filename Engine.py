@@ -17,18 +17,16 @@ def flipDisplay():
     this will be the graphics thread
     '''
     while(g.running and g.threadCount is threading.activeCount()):
-        g.currentTime = time.time()
-        if g.currentTime > g.refreshTime:
-            g.window.fill(g.bgcolor)
-            world = g.world
-            world.acquire()
-            for gobj in world.world:
-                gobj.acquire()
-                gobj.draw(g.window)
-                gobj.release()
-            world.release()
-            g.pygame.display.flip()
-            g.refreshTime = g.currentTime + g.deltaTime
+        g.window.fill(g.bgcolor)
+        world = g.world
+        world.acquire()
+        for gobj in world.world:
+            gobj.acquire()
+            gobj.draw(g.window)
+            gobj.release()
+        world.release()
+        g.pygame.display.flip()
+        g.clock.tick(g.deltaTime)
 
 GraphicThread = threading.Thread(target=flipDisplay, args=())
 

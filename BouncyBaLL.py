@@ -19,7 +19,7 @@ for i in range(2000):
     elif c.y >= WH or c.y <= 0:
         yv *= -1
         c.move(0, yv)
-    pause(.01)
+    pause(40)
 
 print("Stopping")
 stop()

@@ -26,7 +26,7 @@ for i in range(1000):
             remove(p)
             p = None
             xv *= -1
-    pause(.01)
+    pause(10)
 
 print("Stopping")
 stop()

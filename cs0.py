@@ -31,4 +31,4 @@ def stop():
     Engine.stop()
     
 def pause(t):
-    time.sleep(t)
+    time.sleep(t/1000.0)

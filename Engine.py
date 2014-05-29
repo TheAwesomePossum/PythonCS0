@@ -27,7 +27,7 @@ def flipDisplay():
                 gobj.draw(g.window)
                 gobj.release()
             world.release()
-            pygame.display.flip()
+            g.pygame.display.flip()
             print("Updating window")
             g.refreshTime = g.currentTime + g.deltaTime
 

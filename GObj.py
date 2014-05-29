@@ -37,7 +37,7 @@ class Circle(GObj):
         self.y = y
         self.radius = radius
         self.color = RED
-        self.visible
+        self.visible = True
         
     def move(self, xv, yv):
         self.x += xv

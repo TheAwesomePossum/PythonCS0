@@ -19,7 +19,7 @@ class World:
         self._lock.release()
         
     def add(self, obj):
-        self.world.add(obj)
+        self.world.append(obj)
         
     def remove(self, obj):
         self.world.remove(obj)

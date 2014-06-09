@@ -15,12 +15,12 @@ from Colors import *
 
 class GObj:
 
-    def __init__(self, x, y, color, visible):
+    def __init__(self, x, y, color):
         self._lock = threading.Lock()
         self.x = x
         self.y = y
         self.color = color
-        self.visible = visible
+        self.visible = True
         
     def move(self, xv, yv):
         self.x += xv
@@ -44,14 +44,14 @@ class GObj:
 
 class Circle(GObj):
 
-    def __init__(self, x, y, radius, color = RED, visible = True):
-        GObj.__init__(self, x, y, color, visible)
-        self.radius = radius
+    def __init__(self, x, y, color):
+        GObj.__init__(self, x, y, color)
+        self.radius = 5
         self._type = "Circle"
         
     def draw(self, window):
         if self.visible:
-            pygame.draw.circle(window, self.color, (self.x, self.y), self.radius, 0)
+            pygame.draw.circle(window, self.color, (self.x+self.radius, self.y+self.radius), self.radius, 0)
     
     def _getBox(self):
         x = self.x
@@ -62,10 +62,10 @@ class Circle(GObj):
     
 class Rectangle(GObj):
     
-    def __init__(self, x, y, width, height, color = RED, visible = True):
-        GObj.__init__(self, x, y, color, visible)
-        self.width = width
-        self.height = height
+    def __init__(self, x, y, color):
+        GObj.__init__(self, x, y, color)
+        self.width = 10
+        self.height = 10
         self._type = "Rectangle"
         
     def draw(self, window):
@@ -78,6 +78,17 @@ class Rectangle(GObj):
         w = self.width
         h = self.height
         return ((x, y),(x+w, y+h)) 
+
+class Label(GObj):
+    
+    def __init__(self, x, y, message):
+        GObj.__init__(x, y, BLACK)
+        self.message = message
+        self.font = pygame.font.SysFont("monospace", 15)
+        
+    def draw(self, window):
+        if self.visible:
+            screen.blit(self.font.render(self.message, 1, self.Color), (self.x, self.y))
  
 def collides(obj1, obj2):
     box1 = obj1._getBox()

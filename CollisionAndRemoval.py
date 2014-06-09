@@ -8,8 +8,9 @@ yv = 0
 
 start()
 
-c = Circle(15, 260, 5, color = BLUE)
-p = Rectangle(5, 250, 5, 25)
+c = Circle(15, 260, BLUE)
+p = Rectangle(5, 250, RED)
+p.height = 25
 add(p)
 add(c)
 
@@ -26,7 +27,7 @@ for i in range(1000):
             remove(p)
             p = None
             xv *= -1
-    pause(40)
+    pause(20)
 
 print("Stopping")
 stop()

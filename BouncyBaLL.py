@@ -8,7 +8,7 @@ yv = 2
 
 start()
 
-c = Circle(5, 5, 5)
+c = Circle(5, 5, RED)
 add(c)
 
 for i in range(2000):

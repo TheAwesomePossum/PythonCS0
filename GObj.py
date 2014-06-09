@@ -15,10 +15,10 @@ from Colors import *
 
 class GObj:
 
-    def __init__(self, x, y, color):
+    def __init__(self, color):
         self._lock = threading.Lock()
-        self.x = x
-        self.y = y
+        self.x = 0
+        self.y = 0
         self.color = color
         self.visible = True
         
@@ -44,9 +44,9 @@ class GObj:
 
 class Circle(GObj):
 
-    def __init__(self, x, y, color):
-        GObj.__init__(self, x, y, color)
-        self.radius = 5
+    def __init__(self, rad, color):
+        GObj.__init__(self, color)
+        self.radius = rad
         self._type = "Circle"
         
     def draw(self, window):
@@ -62,10 +62,10 @@ class Circle(GObj):
     
 class Rectangle(GObj):
     
-    def __init__(self, x, y, color):
-        GObj.__init__(self, x, y, color)
-        self.width = 10
-        self.height = 10
+    def __init__(self, width, height, color):
+        GObj.__init__(self, color)
+        self.width = width
+        self.height = height
         self._type = "Rectangle"
         
     def draw(self, window):
@@ -81,10 +81,10 @@ class Rectangle(GObj):
 
 class Label(GObj):
     
-    def __init__(self, x, y, message):
-        GObj.__init__(self, x, y, BLACK)
+    def __init__(self, size, color, message):
+        GObj.__init__(self, color)
         self.message = message
-        self.fontSize = 30
+        self.fontSize = size
         self.fontType = None
         
     def draw(self, window):

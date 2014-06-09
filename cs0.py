@@ -13,16 +13,23 @@ import Engine
 from Colors import *
 from GObj import *
 
-class _data:
+class _Window:
     def __init__(self):
-        pass
+        self.width = 500
+        self.height = 500
+        self.caption = "Game Window"
+        self.color = WHITE
+        
+    def setWidth(self, width):
+        self.width = width
+    def setHeight(self, height):
+        self.height = height
+    def setCaption(self, caption):
+        self.caption = caption
+    def setColor(color):
+        self.color = color
 
-window = _data()
-
-window.width = 500
-window.height = 500
-window.caption = "Game Window"
-window.color = WHITE
+window = _Window()
 
 def add(obj, xPos, yPos):
     obj.x = xPos
@@ -34,6 +41,12 @@ def remove(obj):
 
 def start():
     Engine.start(window.idth, window.height, window.caption, window.color)
+    
+def inWindow(obj):
+    for gobj in g.world:
+        if obj is gobj:
+            return True
+    return False
 
 def stop():
     Engine.stop()

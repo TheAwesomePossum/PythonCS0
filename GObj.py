@@ -82,13 +82,14 @@ class Rectangle(GObj):
 class Label(GObj):
     
     def __init__(self, x, y, message):
-        GObj.__init__(x, y, BLACK)
+        GObj.__init__(self, x, y, BLACK)
         self.message = message
-        self.font = pygame.font.SysFont("monospace", 15)
+        self.fontSize = 15
+        self.fontType = None
         
     def draw(self, window):
         if self.visible:
-            screen.blit(self.font.render(self.message, 1, self.Color), (self.x, self.y))
+            window.blit(pygame.font.Font(self.fontType, self.fontSize).render(self.message, 1, self.color), (self.x - self.fontSize, self.y - self.fontSize))
  
 def collides(obj1, obj2):
     box1 = obj1._getBox()

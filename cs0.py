@@ -40,7 +40,7 @@ def remove(obj):
     g.world.remove(obj)
 
 def start():
-    Engine.start(window.idth, window.height, window.caption, window.color)
+    Engine.start(window.width, window.height, window.caption, window.color)
     
 def inWindow(obj):
     for gobj in g.world:

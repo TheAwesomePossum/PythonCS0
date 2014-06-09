@@ -26,7 +26,7 @@ class _Window:
         self.height = height
     def setCaption(self, caption):
         self.caption = caption
-    def setColor(color):
+    def setColor(self, color):
         self.color = color
 
 window = _Window()

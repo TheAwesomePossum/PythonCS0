@@ -17,7 +17,7 @@ def flipDisplay():
     this will be the graphics thread
     '''
     while(g.running and g.threadCount is threading.activeCount()):
-        g.window.fill(g.bgcolor)
+        g.window.fill(g.world.color)
         world = g.world
         world.acquire()
         for gobj in world.world:
@@ -30,18 +30,17 @@ def flipDisplay():
 
 GraphicThread = threading.Thread(target=flipDisplay, args=())
 
-def start(width, height, caption, color):
+def start(world):
     '''
     Sets up pygame
     Sets up the window
     Starts graphics thread
     '''
     g.pygame.init()
-    size = (width, height)
+    size = (world.width, world.height)
     g.window = g.pygame.display.set_mode(size)
-    g.pygame.display.set_caption(caption)
-    g.window.fill(color)
-    g.bgcolor = color
+    g.pygame.display.set_caption(world.caption)
+    g.window.fill(world.color)
     g.pygame.display.flip()
     g.running = True
     g.startTime = time.time()

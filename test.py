@@ -1,9 +1,9 @@
 from cs0 import *
 
-window.setColor(BLUE)
-window.setCaption("poop nuget mcfart")
+setColor(BLUE)
+setCaption("poop nuget mcfart")
 
-charlie = Circle(20, YELLOW)
+charlie = Oval(20, 40, YELLOW)
 
 add(charlie, 321, 114)
 

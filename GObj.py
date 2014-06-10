@@ -29,6 +29,18 @@ class GObj:
     def setLocation(self, x, y):
         self.x = x
         self.y = y
+    def getLocation(self):
+        return (self.x, self.y)
+
+    def setColor(self, color):
+        self.color = color
+    def getColor(self):
+        return self.color
+
+    def setVisible(self, val):
+        self.visible = val
+    def getVisible(self):
+        return self.visible
     
     def acquire(self):
         self._lock.acquire()
@@ -44,20 +56,52 @@ class GObj:
 
 class Circle(GObj):
 
-    def __init__(self, rad, color):
+    def __init__(self, diam, color):
         GObj.__init__(self, color)
-        self.radius = rad
+        self.diam = diam
         self._type = "Circle"
+
+    def setDiameter(self, diam):
+        self.diam = diam
+    def getDiameter(self):
+        return self.diam
         
     def draw(self, window):
         if self.visible:
-            pygame.draw.circle(window, self.color, (self.x+self.radius, self.y+self.radius), self.radius, 0)
+            pygame.draw.circle(window, self.color, (int(self.x+self.diam/2), int(self.y+self.diam/2)), int(self.diam/2), 0)
     
     def _getBox(self):
         x = self.x
         y = self.y
         r = self.radius
-        return ((x, y),(x+2*r, y+2*r)) 
+        return ((x, y),(x+2*r, y+2*r))
+
+class Oval(GObj):
+
+    def __init__(self, width, height, color):
+        GObj.__init__(self, color)
+        self.width = width
+        self.height = height
+        self._type = "Oval"
+
+    def setSize(self, width, height):
+        self.width = width
+        self.height = height
+    def getWidth(self):
+        return self.width
+    def getHeight(self):
+        return self.height
+        
+    def draw(self, window):
+        if self.visible:
+            pygame.draw.ellipse(window, self.color, (self.x, self.y, self.width, self.height), 0)
+    
+    def _getBox(self):
+        x = self.x
+        y = self.y
+        w = self.width
+        h = self.height
+        return ((x, y),(x+w, y+h))
     
     
 class Rectangle(GObj):
@@ -67,6 +111,14 @@ class Rectangle(GObj):
         self.width = width
         self.height = height
         self._type = "Rectangle"
+
+    def setSize(self, width, height):
+        self.width = width
+        self.height = height
+    def getWidth(self):
+        return self.width
+    def getHeight(self):
+        return self.height
         
     def draw(self, window):
         if self.visible:
@@ -86,6 +138,14 @@ class Label(GObj):
         self.message = message
         self.fontSize = size
         self.fontType = None
+
+    def setSize(self, fontSize):
+        self.fontSize = fontSize
+    def getSize(self):
+        return self.fontSize
+
+    def setText(message):
+        self.message = message
         
     def draw(self, window):
         if self.visible:

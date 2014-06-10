@@ -1,20 +1,20 @@
 from cs0 import *
 
-g.WindowCaption = "Collide Test"
-WW = g.WindowWidth = 1000
-WH = g.WindowHeight
-xv = 2
-yv = 0
+window.setColor(BLUE)
+window.setCaption("poop nuget mcfart")
 
-l=Label(0,0, "Hello World")
+charlie = Circle(20, YELLOW)
+
+add(charlie, 321, 114)
 
 start()
 
-add(l)
+count = 0
+while(count is not 100):
+    if charlie.x > window.width:
+        charlie.setLocation(0,0)
+    charlie.move(2, 2)
+    pause(25)
+    count = count + 1
 
-for i in range(1000):
-
-    pause(10)
-
-print("Stopping")
 stop()

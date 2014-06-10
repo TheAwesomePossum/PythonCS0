@@ -28,16 +28,13 @@ class _Window:
         self.caption = caption
     def setColor(self, color):
         self.color = color
-
+    def add(obj, xPos, yPos):
+        obj.x = xPos
+        obj.y = yPos
+        g.world.add(obj)
+    def remove(obj):
+        g.world.remove(obj)
 window = _Window()
-
-def add(obj, xPos, yPos):
-    obj.x = xPos
-    obj.y = yPos
-    g.world.add(obj)
-
-def remove(obj):
-    g.world.remove(obj)
 
 def start():
     Engine.start(window.width, window.height, window.caption, window.color)

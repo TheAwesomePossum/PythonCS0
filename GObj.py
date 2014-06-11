@@ -144,7 +144,7 @@ class Label(GObj):
     def getSize(self):
         return self.fontSize
 
-    def setText(message):
+    def setText(self, message):
         self.message = message
         
     def draw(self, window):

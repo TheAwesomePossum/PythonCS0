@@ -28,16 +28,22 @@ class World:
         self.width = width
     def setHeight(self, height):
         self.height = height
+    def setSize(self, width, height):
+        self.width = width
+        self.height = height
+        
     def setCaption(self, caption):
         self.caption = caption
     def setColor(self, color):
         self.color = color
+        
     def add(self, obj, xPos, yPos):
         obj.x = xPos
         obj.y = yPos
         self.world.append(obj)
     def remove(self, obj):
         self.world.remove(obj)
+        
     def inWorld(self, obj):
         for gobj in self.world:
             if obj is gobj:

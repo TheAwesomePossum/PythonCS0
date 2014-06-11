@@ -29,9 +29,10 @@ def setCaption(message):
 
 def setWidth(width):
     window.setWidth(width)
-
 def setHeight(height):
     window.setHeight(height)
+def setSize(width, height):
+    window.setSize(width, height)
 
 def setColor(color):
     window.setColor(color)

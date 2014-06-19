@@ -16,7 +16,8 @@ def flipDisplay():
     '''
     this will be the graphics thread
     '''
-    while(g.running and g.threadCount is threading.activeCount()):
+    again = True
+    while(g.threadCount is threading.activeCount() and again):
         g.window.fill(g.world.color)
         world = g.world
         world.acquire()
@@ -27,6 +28,8 @@ def flipDisplay():
         world.release()
         g.pygame.display.flip()
         g.clock.tick(g.deltaTime)
+        if not g.running:
+            again = False
 
 GraphicThread = threading.Thread(target=flipDisplay, args=())
 

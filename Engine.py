@@ -11,6 +11,8 @@ import time
 
 # Internal Imports
 import Globals as g # project global variables
+import Events
+
 
 def flipDisplay():
     '''
@@ -18,6 +20,7 @@ def flipDisplay():
     '''
     again = True
     while(g.threadCount is threading.activeCount() and again):
+        Events.updateEvents()
         g.window.fill(g.world.color)
         world = g.world
         world.acquire()
@@ -39,7 +42,6 @@ def start(world):
     Sets up the window
     Starts graphics thread
     '''
-    g.pygame.init()
     size = (world.width, world.height)
     g.window = g.pygame.display.set_mode(size)
     g.pygame.display.set_caption(world.caption)

@@ -1,16 +1,21 @@
 from cs0 import *
 
 setColor(BLUE)
-setCaption("poop nuget mcfart")
+setCaption("hello")
 
 charlie = Oval(20, 40, YELLOW)
 
 add(charlie, 321, 114)
 
+def mouseClick(evt):
+    print(str(evt[0]))
+    
+mouseClickedEvent(mouseClick)
+
 start()
 
 count = 0
-while(count is not 100):
+while(count is not 1000):
     if charlie.x > window.width:
         charlie.setLocation(0,0)
     charlie.move(2, 2)

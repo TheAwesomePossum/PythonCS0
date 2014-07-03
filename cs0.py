@@ -8,13 +8,17 @@ This file is the baisic import file for any cs0 project. It will hold some baisi
 import time
 
 import Globals as g
+g.pygame.init()
 import Engine
+import Events
 
 from Colors import *
 from GObj import *
 
 window = g.world
-    
+  
+###### GUI Editing 
+
 def inWindow(obj):
     return window.inWorld(obj)
 
@@ -40,8 +44,16 @@ def setColor(color):
 def pause(t):
     time.sleep(t/1000.0)
 
+####### Engine Starting/Stoping
+
 def start():
     Engine.start(window)
 
 def stop():
     Engine.stop()
+    
+    
+######## Event Handeling
+
+def mouseClickedEvent(handle):
+    Events.addMouseClickedEvent(handle)

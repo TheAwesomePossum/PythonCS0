@@ -13,6 +13,7 @@ def mouseClick(evt):
 mouseClickedEvent(mouseClick)
 
 start(thread = False)
+#start()
 
 count = 0
 while(count < 500):
@@ -21,6 +22,6 @@ while(count < 500):
     charlie.move(2, 2)
     pause(25)
     count = count + 1
-    #print(count)
+    print(count)
 
 stop()

@@ -27,21 +27,28 @@ class GObj:
     def move(self, xv, yv):
         self.x += xv
         self.y += yv
-        Engine.flipOnce()
+        if not multithreading:
+            Engine.flipOnce()
         
     def setLocation(self, x, y):
         self.x = x
         self.y = y
+        if  not multithreading:
+            Engine.flipOnce()
     def getLocation(self):
         return (self.x, self.y)
 
     def setColor(self, color):
         self.color = color
+        if not multithreading:
+            Engine.flipOnce()
     def getColor(self):
         return self.color
 
     def setVisible(self, val):
         self.visible = val
+        if not multithreading:
+            Engine.flipOnce()
     def getVisible(self):
         return self.visible
     

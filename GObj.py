@@ -13,6 +13,8 @@ import math
 from Globals import *
 from Colors import *
 
+import Engine
+
 class GObj:
 
     def __init__(self, color):
@@ -25,6 +27,7 @@ class GObj:
     def move(self, xv, yv):
         self.x += xv
         self.y += yv
+        Engine.flipOnce()
         
     def setLocation(self, x, y):
         self.x = x

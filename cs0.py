@@ -46,8 +46,9 @@ def pause(t):
 
 ####### Engine Starting/Stoping
 
-def start():
-    Engine.start(window)
+def start(thread=True):
+    #print(thread)
+    Engine.start(window, thread)
 
 def stop():
     Engine.stop()

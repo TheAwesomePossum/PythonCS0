@@ -19,3 +19,4 @@ refreshTime = 0.0 # the next time the screen will refresh
 threadCount = 1 # keeps track of the number of active threads so that if one fails the program stops
 clock = pygame.time.Clock()
 world = World() # is the list of objects to be rendered by the engine
+multithreading = False

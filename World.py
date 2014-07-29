@@ -38,9 +38,9 @@ class World:
         self.color = color
         
     def add(self, obj, xPos, yPos):
-        obj.x = xPos
-        obj.y = yPos
+        obj.setLocation(xPos, yPos)
         self.world.append(obj)
+        print(self.world)
     def remove(self, obj):
         self.world.remove(obj)
         

@@ -19,6 +19,8 @@ class GObj:
 
     def __init__(self, color):
         self._lock = threading.Lock()
+        self.cx = 0
+        self.cy = 0
         self.x = 0
         self.y = 0
         self.color = color
@@ -27,28 +29,21 @@ class GObj:
     def move(self, xv, yv):
         self.x += xv
         self.y += yv
-        if not multithreading:
-            Engine.flipOnce()
         
     def setLocation(self, x, y):
         self.x = x
         self.y = y
-        if  not multithreading:
-            Engine.flipOnce()
+
     def getLocation(self):
         return (self.x, self.y)
 
     def setColor(self, color):
         self.color = color
-        if not multithreading:
-            Engine.flipOnce()
     def getColor(self):
         return self.color
 
     def setVisible(self, val):
         self.visible = val
-        if not multithreading:
-            Engine.flipOnce()
     def getVisible(self):
         return self.visible
     
@@ -63,11 +58,71 @@ class GObj:
             self.acquire()
             self.__dict__[item] = value
             self.release()
+    def __add__(self, obj):
+        if type(obj) is GComp:
+            obj.objs.append(self)
+            return obj
+        elif isinstance(obj, GObj):
+            return GComp(self, obj)
+            
+class GComp(GObj):
+    
+    def __init__(self, obj1, obj2): 
+        GObj.__init__(self, WHITE)
+        self.objs = [obj1,obj2]
+        
+    def move(self, xv, yv):
+        self.x += xv
+        self.y += yv
+        #print("moving")
+        self.updateQualities();      
+    def setLocation(self, x, y):
+        self.x = x
+        self.y = y
+        self.updateQualities();
+    def setVisible(self, val):
+        self.visible = val
+        self.updateQualities();
+    def updateQualities(self):
+        for obj in self.objs:
+            obj.x = self.x + obj.cx
+            obj.y = self.y + obj.cy
+            obj.setVisible(self.visible)
+            
+    def draw(self, window):
+        #print("drawing gcomp")
+        for obj in self.objs:
+            obj.draw(window);
+            
+    def __add__(self, obj):
+        if type(obj) is GComp:
+            self.objs += obj.objs
+        elif isinstance(obj, GObj):
+            self.objs.append(obj)
+        return self
 
+    def _getBox(self):
+        maxX = 0
+        maxY = 0
+        minX = 0
+        minY = 0
+        for obj in self.objs:
+            if obj.x >= maxX:
+                maxX = obj.x
+            elif obj.x <= minX:
+                minX = obj.x
+            if obj.y >= maxY:
+                maxY = obj.y
+            elif obj.y <= minY:
+                minY = obj.y
+        return ((minX, minY), (maxX,maxY))
+        
 class Circle(GObj):
 
-    def __init__(self, diam, color):
+    def __init__(self, diam, color, cx = 0, cy = 0):
         GObj.__init__(self, color)
+        self.cx = cx
+        self.cy = cy
         self.diam = diam
         self._type = "Circle"
 
@@ -83,13 +138,15 @@ class Circle(GObj):
     def _getBox(self):
         x = self.x
         y = self.y
-        r = self.radius
+        r = self.diam/2
         return ((x, y),(x+2*r, y+2*r))
 
 class Oval(GObj):
 
-    def __init__(self, width, height, color):
+    def __init__(self, width, height, color, cx = 0, cy = 0):
         GObj.__init__(self, color)
+        self.cx = cx
+        self.cy = cy
         self.width = width
         self.height = height
         self._type = "Oval"
@@ -116,8 +173,10 @@ class Oval(GObj):
     
 class Rectangle(GObj):
     
-    def __init__(self, width, height, color):
+    def __init__(self, width, height, color, cx = 0, cy = 0):
         GObj.__init__(self, color)
+        self.cx = cx
+        self.cy = cy
         self.width = width
         self.height = height
         self._type = "Rectangle"
@@ -143,8 +202,10 @@ class Rectangle(GObj):
 
 class Label(GObj):
     
-    def __init__(self, size, color, message):
+    def __init__(self, size, color, message, cx = 0, cy = 0):
         GObj.__init__(self, color)
+        self.cx = cx
+        self.cy = cy
         self.message = message
         self.fontSize = size
         self.fontType = None

@@ -6,6 +6,7 @@ This file is the baisic import file for any cs0 project. It will hold some baisi
 '''
 
 import time
+import random
 
 import Globals as g
 g.pygame.init()
@@ -42,6 +43,9 @@ def setColor(color):
     window.setColor(color)
     
 def pause(t):
+    if  (not g.multithreading) and g.running:
+        #print("fliping Display")
+        Engine.flipOnce()
     time.sleep(t/1000.0)
 
 ####### Engine Starting/Stoping
@@ -58,3 +62,66 @@ def stop():
 
 def mouseClickedEvent(handle):
     Events.addMouseClickedEvent(handle)
+    
+def mouseReleasedEvent(handle):
+    Events.addMouseReleasedEvent(handle)
+    
+def mouseMovedEvent(handle):
+    Events.addMouseMovedEvent(handle)
+    
+def keyPressedEvent(handle):
+    Events.addKeyPressedEvent(handle)
+    
+def keyReleasedEvent(handle):
+    Events.addKeyReleasedEvent(handle)
+
+def mouseDraggedEvent(handle):
+    Events.addMouseDraggedEvent(handle)
+
+
+###### Extra functions
+def objectAt(pos):
+    p = Rectangle(1,1,WHITE)
+    for obj in g.world:
+        if collides(obj,p):
+            return obj
+    return None
+        
+def moveForward(obj):
+    world = g.world.world
+    for i in range(len(world)):
+        if world[i] is obj and i is not 0:
+            world[i], world[i-1] = world[i-1], world[i]
+            return
+    
+def moveBackward(obj):
+    world = g.world.world
+    for i in range(len(world)):
+        if world[i] is obj and i is not 0:
+            world[i], world[i-1] = world[i-1], world[i]
+            return
+        
+def sendToFront(obj):
+    world = g.world.world
+    for i in range(len(world)):
+        if world[i] is obj and i is not 0:
+            for j in reversed(range(1,i+1)):
+                world[j], world[j-1] = world[j-1], world[j]
+            return 
+        
+def sendToBack(obj):
+    world = g.world.world
+    for i in range(len(world)):
+        if world[i] is obj and i is not 0:
+            for j in range(i,len(world)):
+                world[j], world[j+1] = world[j+1], world[j]
+            return 
+
+def randomDouble():
+    return random.random()
+
+def randomInt(min, max = None):
+    if max is None:
+        return int(random.random() * (min - .01))
+    else:
+        return int(random.random() * ((max +.99) - min)) - min

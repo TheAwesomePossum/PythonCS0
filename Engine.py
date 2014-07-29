@@ -57,8 +57,8 @@ def start(world, thread):
     g.window.fill(world.color)
     g.pygame.display.flip() 
     g.startTime = time.time()
+    g.running = True
     if thread:     
-        g.running = True
         g.threadCount += 1
         GraphicThread.start()
     
@@ -66,8 +66,8 @@ def stop():
     '''
     stops the graphic thread
     '''
+    g.running = False
     if g.multithreading:
-        g.running = False
         GraphicThread.join()
         Events.eraseEvents()
     while True:

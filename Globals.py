@@ -20,3 +20,5 @@ threadCount = 1 # keeps track of the number of active threads so that if one fai
 clock = pygame.time.Clock()
 world = World() # is the list of objects to be rendered by the engine
 multithreading = False
+running = False
+window = None

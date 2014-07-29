@@ -10,15 +10,19 @@ charlie = Circle(10, RED, 0,0) + Circle(10, YELLOW, 5,5) #+ Rectangle(10,15, AQU
 charlie += Rectangle(10,15, AQUA,0, 10)
 add(charlie, 321, 114)
 
-def mouseClick(evt):
+def printEvent(evt):
     print(str(evt))
     
-mouseClickedEvent(mouseClick)
-mouseReleasedEvent(mouseClick)
+def mouseDrag(evt):
+    charlie.setLocation(evt.pos[0], evt.pos[1])
+
+    
+mouseClickedEvent(printEvent)
+mouseReleasedEvent(printEvent)
 #mouseMovedEvent(mouseClick)
-mouseDraggedEvent(mouseClick)
-keyPressedEvent(mouseClick)
-keyReleasedEvent(mouseClick)
+mouseDraggedEvent(mouseDrag)
+keyPressedEvent(printEvent)
+keyReleasedEvent(printEvent)
 
 start(thread = False)
 #start()

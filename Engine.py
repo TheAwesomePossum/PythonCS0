@@ -70,6 +70,8 @@ def stop():
     if g.multithreading:
         GraphicThread.join()
         Events.eraseEvents()
+    else:
+        flipOnce()
     while True:
         Events.updateEvents()
         g.clock.tick(g.deltaTime)

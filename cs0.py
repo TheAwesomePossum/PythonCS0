@@ -23,11 +23,14 @@ window = g.world
 def inWindow(obj):
     return window.inWorld(obj)
 
-def add(obj, xPos, yPos):
+def add(obj, xPos=0, yPos=0):#------------------- 7/30 modified with defaults 
     window.add(obj, xPos, yPos)
 
 def remove(obj):
-    window.remove
+    window.remove(obj) #----------------------- 7/30 (obj) was missing
+    
+def removeAll(): #------------------------------ 8/1 we need this, removes all objects from the window
+    window.world = []
 
 def setCaption(message):
     window.setCaption(message)
@@ -80,11 +83,14 @@ def mouseDraggedEvent(handle):
 
 
 ###### Extra functions
-def objectAt(pos):
-    p = Rectangle(1,1,WHITE)
-    for obj in g.world:
-        if collides(obj,p):
-            return obj
+def objectAt(pos): #--------------- several changes here
+    #needed to specify the location of the Rectangle, otherwise it's at 0,0
+    #p = Rectangle(1,1,WHITE, pos[0], pos[1]) #---don't know why this doesn't work
+    p = Rectangle(1, 1, WHITE)                #---but these 2 statements
+    p.setLocation(pos[0], pos[1])             #---make it work
+    for obj in g.world.world: #------------ missing last .world I think
+        if type(obj) is not Label and collides(obj,p): #can't collide with a Label
+                return obj
     return None
         
 def moveForward(obj):
@@ -117,11 +123,31 @@ def sendToBack(obj):
                 world[j], world[j+1] = world[j+1], world[j]
             return 
 
-def randomDouble():
-    return random.random()
+#-------------------------------------- my random functions
+def randomSeed(val):
+    random.seed(val)
 
-def randomInt(min, max = None):
+def randomInt(min, max = None): #clever, I didn't know about None
+    #returns random int in range [min, max] or [0, min]
     if max is None:
-        return int(random.random() * (min - .01))
+        return random.randint(0, min)
     else:
-        return int(random.random() * ((max +.99) - min)) - min
+        return random.randint(min, max)
+    
+def randomDouble(min, max = None):
+    #return random double in range [min, max) or [0, min)
+    if max is None:
+        return (min)*random.random()
+    else:
+        return (max-min)*random.random() + min
+    
+def randomBoolean():
+    v = randomInt(1, 2)
+    if v == 1: return True
+    else: return False
+        
+        
+def randomProbability(p):
+    r = randomDouble(1)
+    if r < p: return True
+    else: return False

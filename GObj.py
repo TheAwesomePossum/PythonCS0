@@ -36,6 +36,12 @@ class GObj:
 
     def getLocation(self):
         return (self.x, self.y)
+    
+    def getX(self): #------------------------------- 7/30 added
+        return self.x
+   
+    def getY(self): #------------------------------- 7/30 added
+        return self.y    
 
     def setColor(self, color):
         self.color = color
@@ -140,6 +146,30 @@ class Circle(GObj):
         y = self.y
         r = self.diam/2
         return ((x, y),(x+2*r, y+2*r))
+    
+class Square(GObj): #----------------------------- 7/30 add this class
+                    #----------------------------- haven't checked it thoroughly
+    def __init__(self, width, color):
+        GObj.__init__(self, color)
+        self.width = width
+        self.height = width
+        self._type = "Square"
+ 
+    def setWidth(self, width):
+        self.width = width
+        
+    def getWidth(self):
+        return self.width
+        
+    def draw(self, window):
+        if self.visible:
+            pygame.draw.rect(window, self.color, (self.x, self.y, self.width, self.height), 0)
+            
+    def _getBox(self):
+        x = self.x
+        y = self.y
+        w = self.width
+        return ((x, y),(x+w, y+w))
 
 class Oval(GObj):
 
@@ -153,6 +183,10 @@ class Oval(GObj):
 
     def setSize(self, width, height):
         self.width = width
+        self.height = height
+    def setWidth(self, width): #----------------- 7/30
+        self.width = width
+    def setHeight(self, height): #---------------- 7/30
         self.height = height
     def getWidth(self):
         return self.width
@@ -184,6 +218,10 @@ class Rectangle(GObj):
     def setSize(self, width, height):
         self.width = width
         self.height = height
+    def setHeight(self, height): #-------------- 7/30
+        self.height = height
+    def setWidth(self, width): #---------------- 7/30
+        self.width = width
     def getWidth(self):
         return self.width
     def getHeight(self):
@@ -210,14 +248,16 @@ class Label(GObj):
         self.fontSize = size
         self.fontType = None
 
-    def setSize(self, fontSize):
+    def setFontSize(self, fontSize): #-------- 7/30 changed name
         self.fontSize = fontSize
-    def getSize(self):
+    def getFontSize(self):              #---------- 7/30 changed name
         return self.fontSize
 
     def setText(self, message):
         self.message = message
-        
+    def getText(self): #------------------ 7/30 added
+        return self.message    
+    
     def draw(self, window):
         if self.visible:
             window.blit(pygame.font.Font(self.fontType, self.fontSize).render(self.message, 1, self.color), (self.x, self.y))

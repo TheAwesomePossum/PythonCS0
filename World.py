@@ -7,7 +7,7 @@ This constructs the concurency safe world list
 
 import threading
 
-from Colors import *
+from Constants import *
 
 class World:
     

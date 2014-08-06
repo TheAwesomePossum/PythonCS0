@@ -11,7 +11,7 @@ import math
 
 # Internal imports
 from Globals import *
-from Colors import *
+from Constants import *
 
 import Engine
 

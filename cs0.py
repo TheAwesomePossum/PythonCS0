@@ -13,7 +13,7 @@ g.pygame.init()
 import Engine
 import Events
 
-from Colors import *
+from Constants import *
 from GObj import *
 
 window = g.world

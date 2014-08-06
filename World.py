@@ -38,6 +38,9 @@ class World:
         self.color = color
         
     def add(self, obj, xPos, yPos):
+        if xPos is None or yPos is None:
+            xPos = obj.x
+            yPos = obj.y
         obj.setLocation(xPos, yPos)
         self.world.append(obj)
         print(self.world)

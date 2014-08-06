@@ -23,7 +23,7 @@ window = g.world
 def inWindow(obj):
     return window.inWorld(obj)
 
-def add(obj, xPos=0, yPos=0):#------------------- 7/30 modified with defaults 
+def add(obj, xPos=None, yPos=None):#------------------- 7/30 modified with defaults 
     window.add(obj, xPos, yPos)
 
 def remove(obj):

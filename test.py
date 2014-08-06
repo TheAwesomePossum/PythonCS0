@@ -7,8 +7,9 @@ charlie = Circle(10, RED, 0,0) + Circle(10, YELLOW, 5,5) #+ Rectangle(10,15, AQU
 #print(type(charlie))
 #add(sam, 326, 119)
 #charlie += sam 
-charlie += Rectangle(10,15, AQUA,0, 10)
+b = Rectangle(10,15, AQUA,0, 10)
 add(charlie, 321, 114)
+add(b)
 
 def printEvent(evt):
     print(str(evt))

@@ -17,12 +17,12 @@ import Engine
 
 class GObj:
 
-    def __init__(self, color):
+    def __init__(self, color, x, y):
         self._lock = threading.Lock()
         self.cx = 0
         self.cy = 0
-        self.x = 0
-        self.y = 0
+        self.x = x
+        self.y = y
         self.color = color
         self.visible = True
         
@@ -69,12 +69,20 @@ class GObj:
             obj.objs.append(self)
             return obj
         elif isinstance(obj, GObj):
+            obj.cx = obj.x
+            obj.x = 0
+            obj.cy = obj.y
+            obj.y = 0
+            self.cx = self.x
+            self.x = 0
+            self.cy = self.y
+            self.y = 0
             return GComp(self, obj)
             
 class GComp(GObj):
     
     def __init__(self, obj1, obj2): 
-        GObj.__init__(self, WHITE)
+        GObj.__init__(self, WHITE, 0, 0)
         self.objs = [obj1,obj2]
         
     def move(self, xv, yv):
@@ -104,6 +112,10 @@ class GComp(GObj):
         if type(obj) is GComp:
             self.objs += obj.objs
         elif isinstance(obj, GObj):
+            obj.cx = obj.x
+            obj.x = 0
+            obj.cy = obj.y
+            obj.y = 0
             self.objs.append(obj)
         return self
 
@@ -125,10 +137,8 @@ class GComp(GObj):
         
 class Circle(GObj):
 
-    def __init__(self, diam, color, cx = 0, cy = 0):
-        GObj.__init__(self, color)
-        self.cx = cx
-        self.cy = cy
+    def __init__(self, diam, color, x = 0, y = 0):
+        GObj.__init__(self, color, x, y)
         self.diam = diam
         self._type = "Circle"
 
@@ -149,8 +159,8 @@ class Circle(GObj):
     
 class Square(GObj): #----------------------------- 7/30 add this class
                     #----------------------------- haven't checked it thoroughly
-    def __init__(self, width, color):
-        GObj.__init__(self, color)
+    def __init__(self, width, color, x = 0, y = 0):
+        GObj.__init__(self, color, x, y)
         self.width = width
         self.height = width
         self._type = "Square"
@@ -173,10 +183,8 @@ class Square(GObj): #----------------------------- 7/30 add this class
 
 class Oval(GObj):
 
-    def __init__(self, width, height, color, cx = 0, cy = 0):
-        GObj.__init__(self, color)
-        self.cx = cx
-        self.cy = cy
+    def __init__(self, width, height, color, x = 0, y = 0):
+        GObj.__init__(self, color, x, y)
         self.width = width
         self.height = height
         self._type = "Oval"
@@ -207,10 +215,8 @@ class Oval(GObj):
     
 class Rectangle(GObj):
     
-    def __init__(self, width, height, color, cx = 0, cy = 0):
-        GObj.__init__(self, color)
-        self.cx = cx
-        self.cy = cy
+    def __init__(self, width, height, color, x = 0, y = 0):
+        GObj.__init__(self, color, x, y)
         self.width = width
         self.height = height
         self._type = "Rectangle"
@@ -240,10 +246,8 @@ class Rectangle(GObj):
 
 class Label(GObj):
     
-    def __init__(self, size, color, message, cx = 0, cy = 0):
-        GObj.__init__(self, color)
-        self.cx = cx
-        self.cy = cy
+    def __init__(self, size, color, message, x = 0, y = 0):
+        GObj.__init__(self, color, x, y)
         self.message = message
         self.fontSize = size
         self.fontType = None

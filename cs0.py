@@ -53,7 +53,7 @@ def pause(t):
 
 ####### Engine Starting/Stoping
 
-def start(thread=True):
+def start(thread=False):
     #print(thread)
     Engine.start(window, thread)
 

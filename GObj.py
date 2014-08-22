@@ -88,7 +88,6 @@ class GComp(GObj):
     def move(self, xv, yv):
         self.x += xv
         self.y += yv
-        #print("moving")
         self.updateQualities();      
     def setLocation(self, x, y):
         self.x = x
@@ -102,9 +101,26 @@ class GComp(GObj):
             obj.x = self.x + obj.cx
             obj.y = self.y + obj.cy
             obj.setVisible(self.visible)
+    def getWidth(self):
+        maxX = 0
+        minX = 0
+        for obj in self.objs:
+            if obj.x >= maxX:
+                maxX = obj.x
+            elif obj.x <= minX:
+                minX = obj.x
+        return maxX-minX
+    def getHeight(self):
+        maxY = 0
+        minY = 0
+        for obj in self.objs:
+            if obj.y >= maxY:
+                maxY = obj.y
+            elif obj.y <= minY:
+                minY = obj.y
+        return maxY-minY
             
     def draw(self, window):
-        #print("drawing gcomp")
         for obj in self.objs:
             obj.draw(window);
             

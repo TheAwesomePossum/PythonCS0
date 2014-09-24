@@ -284,7 +284,7 @@ class Label(GObj):
  
 def collides(obj1, obj2):
     if obj1 is None or obj2 is None or not world.inWorld(obj1) or not world.inWorld(obj2):
-        return
+        return False
     box1 = obj1._getBox()
     box2 = obj2._getBox()
     xmin = 0

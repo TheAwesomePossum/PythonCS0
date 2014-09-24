@@ -283,6 +283,8 @@ class Label(GObj):
             window.blit(pygame.font.Font(self.fontType, self.fontSize).render(self.message, 1, self.color), (self.x, self.y))
  
 def collides(obj1, obj2):
+    if obj1 is None or obj2 is None:
+        return
     box1 = obj1._getBox()
     box2 = obj2._getBox()
     xmin = 0

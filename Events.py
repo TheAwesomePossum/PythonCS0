@@ -9,6 +9,7 @@ import sys
 
 import Globals as g
 import Engine
+import time
 
 pygame = g.pygame
 
@@ -35,7 +36,7 @@ def eraseEvents():
     pygame.event.set_blocked(pygame.KEYUP)
     pygame.event.set_blocked(pygame.MOUSEMOTION)
     pygame.event.set_blocked(pygame.MOUSEBUTTONUP)
-    pygame.event.set_blocked(pygame.MOUSEBUTTONDOWN)
+    #pygame.event.set_blocked(pygame.MOUSEBUTTONDOWN)
     pygame.event.set_blocked(pygame.JOYAXISMOTION)
     pygame.event.set_blocked(pygame.JOYBALLMOTION)
     pygame.event.set_blocked(pygame.JOYHATMOTION)
@@ -77,7 +78,7 @@ def updateEvents():
                 EventList["MouseDragged"](evt) 
         
 def addMouseClickedEvent(handle):
-    pygame.event.set_allowed(pygame.MOUSEBUTTONDOWN)
+    #pygame.event.set_allowed(pygame.MOUSEBUTTONDOWN)
     EventList[pygame.event.event_name(pygame.MOUSEBUTTONDOWN)] = handle
     #print(EventList)
     
@@ -113,3 +114,10 @@ def addMouseDraggedEvent(handle):
         EventList[pygame.event.event_name(pygame.MOUSEMOTION)] = noHandle
     g.draggedEventActive = True
     EventList["MouseDragged"] = handle
+    
+def waitForClick():
+    cont = True
+    while(cont):
+        for evt in pygame.event.get():
+            if evt.type is pygame.MOUSEBUTTONDOWN:
+                cont = False

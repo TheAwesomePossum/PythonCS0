@@ -151,3 +151,6 @@ def randomProbability(p):
     r = randomDouble(1)
     if r < p: return True
     else: return False
+    
+def waitForClick():
+    Events.waitForClick()

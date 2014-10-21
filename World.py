@@ -43,7 +43,7 @@ class World:
             yPos = obj.y
         obj.setLocation(xPos, yPos)
         self.world.append(obj)
-        print(self.world)
+        #print(self.world)
     def remove(self, obj):
         self.world.remove(obj)
         

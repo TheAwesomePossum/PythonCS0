@@ -28,6 +28,7 @@ keyReleasedEvent(printEvent)
 start(thread = False)
 #start()
 
+waitForClick()
 count = 0
 while(count < 500):
     if charlie.x > window.width:
